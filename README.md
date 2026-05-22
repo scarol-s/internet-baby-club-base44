@@ -179,7 +179,7 @@ internet-baby-club/
 | Ferramenta | Uso |
 |---|---|
 | Base44 | Geração do design e funcionalidades via IA |
-| Claude.ai | Conversão React → HTML/CSS/JS e correção de links |
+| Claude.ai | Análise e verificação dos códigos gerados |
 | HTML + CSS + JS | Desenvolvimento frontend |
 | GitHub | Versionamento e repositório |
 | Vercel | Deploy e hospedagem |
