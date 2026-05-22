@@ -11,9 +11,37 @@ Esta atividade teve como objetivo comparar a plataforma de design orientado por 
 ## Etapa 1 — Design no Base44
  
 ### 1.1 Prints das telas geradas
- 
-> ⚠️ *Adicionar aqui os prints/screenshots das telas geradas pelo Base44.*
- 
+
+## Página inicial
+<img width="1366" height="768" alt="pg1 inicial" src="https://github.com/user-attachments/assets/8d1c5d03-2d4c-427e-b3e3-0c8add80bd7c" />
+<img width="1366" height="768" alt="pg2 inicial" src="https://github.com/user-attachments/assets/48d2303a-9e2f-47a0-973c-0dc2e8586fec" />
+<img width="1366" height="768" alt="pg3 inicial" src="https://github.com/user-attachments/assets/060cd657-c519-4274-b72b-030aceb076f6" />
+<img width="1366" height="768" alt="pg4 inicial" src="https://github.com/user-attachments/assets/b51e6b4c-4d42-4dc4-b999-0a6efbea8935" />
+
+## Lançamentos
+<img width="1366" height="768" alt="lançamentos2 " src="https://github.com/user-attachments/assets/9659dba1-dbb7-4256-83bb-fc1382edad5a" />
+<img width="1366" height="768" alt="lançamentos1 " src="https://github.com/user-attachments/assets/161c2973-2b08-4178-b7b7-d7bc79ee7521" />
+## Produtos
+<img width="1366" height="768" alt="produtos1" src="https://github.com/user-attachments/assets/7f48895f-f62c-4a13-9606-15b0669aa66f" />
+## Artistas 
+<img width="1366" height="768" alt="artistas1" src="https://github.com/user-attachments/assets/e6e76248-f7ca-48aa-8834-43267a002500" />
+## Lista de desejos 
+<img width="1366" height="768" alt="lista de desejos1" src="https://github.com/user-attachments/assets/08f6d073-06fa-4ba9-8493-9989696aa19d" />
+
+## Sobre 
+
+## Contato
+
+## Busca
+
+## Perfil
+
+## Sacola
+
+
+
+
+
 As páginas geradas foram:
 - `index.html` — Página inicial
 - `pages/produtos.html` — Produtos
