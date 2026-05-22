@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Perfil — Internet Baby Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<div id="drawers-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<div class="page-wrap-sm">
+  <!-- Header -->
+  <div class="perfil-header">
+    <div class="perfil-avatar">👤</div>
+    <div>
+      <div class="perfil-name">Meu Perfil</div>
+      <div class="perfil-sub">Gerencie suas informações e pedidos</div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="perfil-tabs">
+    <button class="perfil-tab active" onclick="setTab('dados')">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Dados Pessoais
+    </button>
+    <button class="perfil-tab" onclick="setTab('pedidos')">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Meus Pedidos
+    </button>
+    <button class="perfil-tab" onclick="setTab('wishlist')">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Lista de Desejos
+    </button>
+    <button class="perfil-tab" onclick="setTab('config')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Configurações
+    </button>
+  </div>
+
+  <!-- Content -->
+  <div class="perfil-content" id="perfil-content"></div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  initPage('');
+
+  const TABS = {
+    dados: () => `
+      <h2 style="font-size:13px;font-weight:700;text-transform:uppercase;margin-bottom:20px">Dados Pessoais</h2>
+      ${['Nome Completo','E-mail','CPF','Telefone','Data de Nascimento'].map(f =>
+        `<label class="perfil-field-label">${f}</label><input class="perfil-input" type="text" placeholder="${f}" />`
+      ).join('')}
+      <label class="perfil-field-label">Tamanho</label>
+      <select class="perfil-input"><option>PP</option><option>P</option><option>M</option><option>G</option><option>GG</option></select>
+      <button class="btn-save" onclick="showToast('Alterações salvas ✓')">Salvar alterações</button>`,
+
+    pedidos: () => `
+      <div class="no-orders">
+        <div class="n-emoji">📦</div>
+        <p>Nenhum pedido encontrado</p>
+        <span>Seus pedidos aparecerão aqui.</span>
+      </div>`,
+
+    wishlist: () => wishlist.length === 0
+      ? `<p style="font-size:13px;opacity:.6;font-weight:500">Nenhum item na lista de desejos.<br><a href="./lista-de-desejos.html" style="color:var(--ibc-purple);text-decoration:underline">Ver lista de desejos</a></p>`
+      : `<h2 style="font-size:13px;font-weight:700;text-transform:uppercase;margin-bottom:16px">Meus Favoritos (${wishlist.length})</h2>
+         ${wishlist.map(item => `
+           <div class="sacola-item" style="margin-bottom:10px">
+             <div class="sacola-emoji">${item.emoji}</div>
+             <div class="sacola-info">
+               <div class="sacola-name">${item.name}</div>
+               <div class="sacola-price">R$ ${item.price.toFixed(2).replace('.',',')}</div>
+             </div>
+           </div>`).join('')}`,
+
+    config: () => `
+      <h2 style="font-size:13px;font-weight:700;text-transform:uppercase;margin-bottom:20px">Configurações</h2>
+      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:32px">
+        <label style="display:flex;align-items:center;gap:12px;font-size:13px;font-weight:500;cursor:pointer">
+          <input type="checkbox" style="width:18px;height:18px;accent-color:var(--ibc-purple)" />
+          Receber novidades por e-mail
+        </label>
+        <label style="display:flex;align-items:center;gap:12px;font-size:13px;font-weight:500;cursor:pointer">
+          <input type="checkbox" style="width:18px;height:18px;accent-color:var(--ibc-purple)" />
+          Notificações de drops
+        </label>
+      </div>
+      <button class="btn-logout">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sair da conta
+      </button>`,
+  };
+
+  let activeTab = 'dados';
+  function setTab(tab) {
+    activeTab = tab;
+    document.querySelectorAll('.perfil-tab').forEach((b,i) => b.classList.toggle('active', ['dados','pedidos','wishlist','config'][i] === tab));
+    document.getElementById('perfil-content').innerHTML = TABS[tab]();
+  }
+
+  setTab('dados');
+</script>
+</body>
+</html>
