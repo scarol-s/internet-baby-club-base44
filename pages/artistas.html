@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artistas — Internet Baby Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<div id="drawers-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<div class="page-wrap">
+  <h1 class="page-title">Artistas</h1>
+  <p class="page-sub">Conheça os artistas e criadores por trás dos produtos do Internet Baby Club.</p>
+
+  <div class="filter-tabs" id="artist-tabs"></div>
+
+  <div id="artist-detail-wrap"></div>
+  <div id="artists-content"></div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  initPage('artistas');
+
+  const params = new URLSearchParams(window.location.search);
+  let selectedArtist = params.get('artist') || null;
+
+  function renderArtistPage() {
+    // Tabs
+    document.getElementById('artist-tabs').innerHTML =
+      `<button class="filter-tab${!selectedArtist?' active':''}" onclick="selectArtist(null)">Todos</button>` +
+      ARTISTS.map(a =>
+        `<button class="filter-tab${selectedArtist===a.id?' active':''}" onclick="selectArtist('${a.id}')">${a.emoji} ${a.name}</button>`
+      ).join('');
+
+    // Detail
+    const detailWrap = document.getElementById('artist-detail-wrap');
+    const current = ARTISTS.find(a => a.id === selectedArtist);
+    if (current) {
+      const bg = COLOR_MAP[current.color] || 'var(--ibc-cream)';
+      detailWrap.innerHTML = `
+        <div class="artist-detail" style="background:${bg}">
+          <div class="artist-detail-avatar">${current.emoji}</div>
+          <div>
+            <div class="artist-tag">${current.tag}</div>
+            <h2 style="font-size:24px;font-weight:700;text-transform:uppercase;margin:4px 0 8px">${current.name}</h2>
+            <p style="font-size:13px;font-weight:500;opacity:.8;max-width:500px">${current.desc}</p>
+          </div>
+        </div>`;
+    } else {
+      detailWrap.innerHTML = '';
+    }
+
+    // Content
+    const content = document.getElementById('artists-content');
+    if (selectedArtist && current) {
+      const prods = PRODUCTS.filter(p => p.artist === selectedArtist);
+      content.innerHTML = `<h3 style="font-size:16px;font-weight:700;text-transform:uppercase;margin-bottom:20px">Produtos de ${current.name}</h3>` +
+        (prods.length
+          ? `<div class="products-grid">${prods.map(p=>buildProductCard(p,true)).join('')}</div>`
+          : `<p style="font-size:13px;opacity:.6">Nenhum produto encontrado para este artista.</p>`);
+    } else {
+      content.innerHTML = `
+        <div class="artists-grid">
+          ${ARTISTS.map(a => `
+            <button class="artist-card" onclick="selectArtist('${a.id}')">
+              <div class="artist-avatar" style="background:${COLOR_MAP[a.color]||'var(--ibc-cream)'}">
+                ${a.emoji}
+              </div>
+              <div>
+                <div class="artist-tag">${a.tag}</div>
+                <div class="artist-name">${a.name}</div>
+                <div class="artist-desc">${a.desc}</div>
+              </div>
+            </button>`).join('')}
+          <div class="artist-cta-card">
+            <div class="cta-emoji">➕</div>
+            <div class="artist-cta-title">Seja um artista</div>
+            <div class="artist-cta-sub">Quer fazer parte do Internet Baby Club?</div>
+            <a href="./contato.html" class="btn-artist-cta">Falar com a gente</a>
+          </div>
+        </div>`;
+    }
+  }
+
+  function selectArtist(id) {
+    selectedArtist = id;
+    renderArtistPage();
+    window.history.replaceState({}, '', id ? `?artist=${id}` : window.location.pathname);
+  }
+
+  renderArtistPage();
+</script>
+</body>
+</html>
