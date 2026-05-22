@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acompanhar Pedido — Internet Baby Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<div id="drawers-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<div class="tracking-wrap">
+  <h1 class="page-title">Acompanhar Pedido</h1>
+  <p class="page-sub" style="margin-bottom:32px">Insira o número do pedido ou CPF para rastrear.</p>
+
+  <form class="tracking-form" onsubmit="trackOrder(event)">
+    <input class="tracking-input" type="text" id="tracking-input" placeholder="Nº do pedido ou CPF" />
+    <button type="submit" class="btn-track">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+  </form>
+
+  <div id="tracking-result"></div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  initPage('');
+
+  const STEPS = [
+    { label:"Confirmado",   emoji:"✅", date:"19/05/2025 - 14:32", desc:"Pedido recebido com sucesso!", active:true },
+    { label:"Em separação", emoji:"📦", date:"19/05/2025 - 16:00", desc:"Seus produtos estão sendo separados.", active:true },
+    { label:"Enviado",      emoji:"🚚", date:"20/05/2025 - 09:15", desc:"Pacote entregue à transportadora.", active:true },
+    { label:"A caminho",    emoji:"📍", date:"",                   desc:"Em trânsito para o destino.", active:false },
+    { label:"Entregue",     emoji:"🎉", date:"",                   desc:"Pedido entregue!", active:false },
+  ];
+
+  function trackOrder(e) {
+    e.preventDefault();
+    const q = document.getElementById('tracking-input').value.trim();
+    if (!q) return;
+    document.getElementById('tracking-result').innerHTML = `
+      <div class="tracking-box">
+        <h2 style="font-size:13px;font-weight:700;text-transform:uppercase;margin-bottom:24px">Status do pedido #${q}</h2>
+        <div class="tracking-steps">
+          <div class="tracking-line"></div>
+          ${STEPS.map(s => `
+            <div class="tracking-step ${s.active?'':'step-inactive'}">
+              <div class="step-dot ${s.active?'active':'inactive'}">${s.emoji}</div>
+              <div class="step-label">${s.label}</div>
+              ${s.date ? `<div class="step-date">${s.date}</div>` : ''}
+              <div class="step-desc">${s.desc}</div>
+            </div>`).join('')}
+        </div>
+      </div>`;
+  }
+</script>
+</body>
+</html>
