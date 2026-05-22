@@ -21,26 +21,36 @@ Esta atividade teve como objetivo comparar a plataforma de design orientado por 
 ## Lançamentos
 <img width="1366" height="768" alt="lançamentos2 " src="https://github.com/user-attachments/assets/9659dba1-dbb7-4256-83bb-fc1382edad5a" />
 <img width="1366" height="768" alt="lançamentos1 " src="https://github.com/user-attachments/assets/161c2973-2b08-4178-b7b7-d7bc79ee7521" />
-## Produtos
+
+## Lista de produtos e produto individual
 <img width="1366" height="768" alt="produtos1" src="https://github.com/user-attachments/assets/7f48895f-f62c-4a13-9606-15b0669aa66f" />
+<img width="1366" height="768" alt="produto detalhe1" src="https://github.com/user-attachments/assets/6e695eed-84af-48c7-b129-44902ff3c39f" />
+<img width="1366" height="768" alt="produto detalhe2" src="https://github.com/user-attachments/assets/a4149f5b-bbdd-46e7-9f31-075b2db4fa09" />
+
 ## Artistas 
 <img width="1366" height="768" alt="artistas1" src="https://github.com/user-attachments/assets/e6e76248-f7ca-48aa-8834-43267a002500" />
+
 ## Lista de desejos 
 <img width="1366" height="768" alt="lista de desejos1" src="https://github.com/user-attachments/assets/08f6d073-06fa-4ba9-8493-9989696aa19d" />
 
 ## Sobre 
+<img width="1366" height="768" alt="sobre1" src="https://github.com/user-attachments/assets/fd2406e7-a9e1-4662-a09c-140ab96851bf" />
+<img width="1366" height="768" alt="sobre2" src="https://github.com/user-attachments/assets/6b5a54e8-0384-4a86-98ec-2cb54384fee6" />
+<img width="1366" height="768" alt="sobre3" src="https://github.com/user-attachments/assets/57f06a66-63b5-4e8e-a0f0-129f747c14a9" />
 
 ## Contato
+<img width="1366" height="768" alt="contato1" src="https://github.com/user-attachments/assets/2bb01a5d-7f16-4d11-b0a5-a8aa94f2a3fb" />
 
 ## Busca
+<img width="1366" height="768" alt="busca1" src="https://github.com/user-attachments/assets/2fde40cc-c28d-4a9b-b368-0cc23b7f5de5" />
 
 ## Perfil
+<img width="1366" height="768" alt="perfil1" src="https://github.com/user-attachments/assets/a367a3ec-cdb3-42ed-8fb6-395c2fd874cd" />
+<img width="1366" height="768" alt="perfil2" src="https://github.com/user-attachments/assets/e48e1748-0d88-480f-8fe5-c02a481630da" />
 
 ## Sacola
-
-
-
-
+<img width="1366" height="768" alt="sacola1" src="https://github.com/user-attachments/assets/b0244bd1-9c88-4939-b14d-cafa2fd8e758" />
+<img width="1366" height="768" alt="sacola2" src="https://github.com/user-attachments/assets/02f81eb8-2860-4986-ba69-f3da4e2c5fba" />
 
 As páginas geradas foram:
 - `index.html` — Página inicial
