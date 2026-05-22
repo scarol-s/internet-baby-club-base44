@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produtos — Internet Baby Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<div id="drawers-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<div class="page-wrap">
+  <div style="margin-bottom:32px">
+    <h1 class="page-title">Todos os Produtos</h1>
+    <p class="page-sub">Explore a curadoria completa do Internet Baby Club.</p>
+  </div>
+
+  <div class="filter-tabs" id="filter-tabs">
+    <svg class="filter-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+  </div>
+
+  <div class="toolbar">
+    <span class="toolbar-count" id="result-count">20 produtos</span>
+    <select id="sort-select" onchange="applyFilters()">
+      <option value="relevancia">Relevância</option>
+      <option value="menor">Menor Preço</option>
+      <option value="maior">Maior Preço</option>
+      <option value="novo">Novidades</option>
+    </select>
+  </div>
+
+  <div class="products-grid-4" id="products-grid"></div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  initPage('produtos');
+
+  const mainCats = [
+    { id:'all',          name:'Todas' },
+    { id:'posters',      name:'Pôsteres' },
+    { id:'papelaria',    name:'Papelaria' },
+    { id:'camisetas',    name:'Moda' },
+    { id:'acessorios',   name:'Acessórios' },
+    { id:'colecionaveis',name:'Colecionáveis' },
+  ];
+
+  const params = new URLSearchParams(window.location.search);
+  let activeCat = params.get('cat') || 'all';
+  let sortBy = 'relevancia';
+
+  // Build filter tabs
+  document.getElementById('filter-tabs').innerHTML +=
+    mainCats.map(c =>
+      `<button class="filter-tab${c.id===activeCat?' active':''}" onclick="setCat('${c.id}')">${c.name}</button>`
+    ).join('');
+
+  function setCat(id) {
+    activeCat = id;
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-tab').forEach(b => { if(b.textContent.trim() === mainCats.find(c=>c.id===id)?.name) b.classList.add('active'); });
+    applyFilters();
+  }
+
+  function applyFilters() {
+    sortBy = document.getElementById('sort-select').value;
+    let items = activeCat === 'all' ? [...PRODUCTS] : PRODUCTS.filter(p => p.category === activeCat);
+    if (sortBy === 'menor') items.sort((a,b) => a.price - b.price);
+    if (sortBy === 'maior') items.sort((a,b) => b.price - a.price);
+    if (sortBy === 'novo')  items.sort((a,b) => (b.isNew?1:0) - (a.isNew?1:0));
+    document.getElementById('result-count').textContent = `${items.length} produto${items.length!==1?'s':''}`;
+    document.getElementById('products-grid').innerHTML = items.map(p => buildProductCard(p)).join('');
+  }
+
+  applyFilters();
+</script>
+</body>
+</html>
