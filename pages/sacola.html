@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sacola — Internet Baby Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<div id="drawers-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<div class="page-wrap">
+  <h1 class="page-title" style="margin-bottom:32px">Minha Sacola</h1>
+  <div id="sacola-content"></div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  initPage('');
+
+  function renderSacola() {
+    const el = document.getElementById('sacola-content');
+    if (cart.length === 0) {
+      el.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-emoji">🛍️</div>
+          <h2>Sua sacola está vazia</h2>
+          <p>Adicione produtos para continuar comprando.</p>
+          <a href="./produtos.html" class="btn-checkout" style="display:inline-block;width:auto;padding:14px 32px">Ver Produtos</a>
+        </div>`;
+      return;
+    }
+
+    const itemsHtml = cart.map(item => `
+      <div class="sacola-item" id="sacola-item-${item.id}">
+        <div class="sacola-emoji">${item.emoji}</div>
+        <div class="sacola-info">
+          <div class="sacola-name">${item.name}</div>
+          <div class="sacola-price">R$ ${(item.price * item.qty).toFixed(2).replace('.',',')}</div>
+          <div class="qty-controls" style="margin-top:10px">
+            <button class="qty-btn" onclick="sacQty(${item.id},-1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="sacQty(${item.id},1)">+</button>
+            <button class="remove-btn" onclick="sacRemove(${item.id})">Remover</button>
+          </div>
+        </div>
+      </div>`).join('');
+
+    const frete = 0;
+    const sub = cartTotal();
+    el.innerHTML = `
+      <div class="sacola-layout">
+        <div>${itemsHtml}</div>
+        <div>
+          <div class="sacola-summary">
+            <h3>Resumo do Pedido</h3>
+            <div class="summary-row"><span>Subtotal (${cartCount()} itens)</span><span>R$ ${sub.toFixed(2).replace('.',',')}</span></div>
+            <div class="summary-row"><span>Frete</span><span>${frete===0?'Grátis':'R$ '+frete.toFixed(2).replace('.',',')}</span></div>
+            <div class="summary-total"><span>Total</span><span>R$ ${(sub+frete).toFixed(2).replace('.',',')}</span></div>
+            <a href="./pagamento.html" class="btn-checkout">Finalizar Compra</a>
+            <a href="./produtos.html" class="btn-continue">Continuar Comprando</a>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function sacQty(id, delta) {
+    updateQty(id, delta);
+    renderSacola();
+  }
+  function sacRemove(id) {
+    removeFromCart(id);
+    renderSacola();
+  }
+
+  renderSacola();
+</script>
+</body>
+</html>
