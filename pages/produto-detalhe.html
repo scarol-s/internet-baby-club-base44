@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produto — Internet Baby Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<div id="drawers-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<div class="page-wrap" id="detalhe-wrap"></div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  initPage('');
+
+  const params = new URLSearchParams(window.location.search);
+  const id = Number(params.get('id'));
+  const product = PRODUCTS.find(p => p.id === id);
+
+  const wrap = document.getElementById('detalhe-wrap');
+
+  if (!product) {
+    wrap.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-emoji">🔍</div>
+        <h2>Produto não encontrado</h2>
+        <p>O produto que você está procurando não existe.</p>
+        <a href="./produtos.html" class="btn-checkout" style="display:inline-block;width:auto;padding:14px 32px">Ver Produtos</a>
+      </div>`;
+  } else {
+    const bg = COLOR_MAP[product.color] || 'var(--ibc-cream)';
+    const badgeHtml = product.badge
+      ? `<span class="detalhe-badge" style="background:${BADGE_COLOR[product.badge]||'var(--ibc-green)'}">${product.badge}</span><br>`
+      : '';
+    const related = PRODUCTS.filter(p => p.category === product.category && p.id !== product.id).slice(0,4);
+
+    wrap.innerHTML = `
+      <div style="margin-bottom:8px">
+        <a href="./produtos.html" style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;opacity:.5;display:inline-flex;align-items:center;gap:6px">
+          ← Voltar aos produtos
+        </a>
+      </div>
+      <div class="detalhe-layout" style="margin-top:24px">
+        <div>
+          <div class="detalhe-img-wrap" style="background:${bg}">
+            <span>${product.emoji}</span>
+          </div>
+        </div>
+        <div>
+          <div class="detalhe-category">${product.category}</div>
+          ${badgeHtml}
+          <h1 class="detalhe-title">${product.name}</h1>
+          <div class="detalhe-price">R$ ${product.price.toFixed(2).replace('.',',')}</div>
+          <p class="detalhe-desc">A4 · impressão digital em papel premium. Peça exclusiva criada por artistas do Internet Baby Club.</p>
+          <div class="shipping-box">
+            🚚 <strong>Frete grátis</strong> para todo o Brasil em pedidos acima de R$ 150,00<br>
+            📦 Prazo de envio: 3 a 7 dias úteis
+          </div>
+          <div class="detalhe-actions">
+            <button id="detalhe-add-btn" class="btn-detalhe-add${isInCart(product.id)?' in-cart':''}" onclick="detAlhe_addCart()">
+              ${isInCart(product.id) ? '✓ Na sacola' : '🛍 Adicionar à sacola'}
+            </button>
+            <button id="detalhe-wish-btn" class="btn-detalhe-wish${isInWishlist(product.id)?' wishlisted':''}" onclick="detAlhe_wish()">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      ${related.length ? `
+      <div class="related-section">
+        <h2 style="font-size:20px;font-weight:700;text-transform:uppercase;margin-bottom:24px">Você também pode gostar</h2>
+        <div class="products-grid">${related.map(p => buildProductCard(p)).join('')}</div>
+      </div>` : ''}`;
+
+    document.title = `${product.name} — Internet Baby Club`;
+  }
+
+  function detAlhe_addCart() {
+    if (!product) return;
+    addToCart(product);
+    const btn = document.getElementById('detalhe-add-btn');
+    if (btn) { btn.classList.add('in-cart'); btn.textContent = '✓ Na sacola'; }
+  }
+
+  function detAlhe_wish() {
+    if (!product) return;
+    toggleWishlist(product);
+    const btn = document.getElementById('detalhe-wish-btn');
+    if (btn) btn.classList.toggle('wishlisted', isInWishlist(product.id));
+  }
+</script>
+</body>
+</html>
