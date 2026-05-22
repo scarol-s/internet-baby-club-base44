@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contato — Internet Baby Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<div id="drawers-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<div class="page-wrap-sm">
+  <h1 class="page-title">Fala com a gente</h1>
+  <p class="page-sub">Tem alguma dúvida, sugestão ou quer ser um artista parceiro? Manda mensagem!</p>
+
+  <div class="contato-grid">
+    <!-- Form -->
+    <div>
+      <div id="form-area">
+        <form onsubmit="handleContato(event)">
+          <label class="form-label" for="ct-nome">Nome</label>
+          <input class="form-input" type="text" id="ct-nome" required placeholder="Seu nome completo" />
+
+          <label class="form-label" for="ct-email">E-mail</label>
+          <input class="form-input" type="email" id="ct-email" required placeholder="seuemail@exemplo.com" />
+
+          <label class="form-label" for="ct-assunto">Assunto</label>
+          <select class="form-input" id="ct-assunto">
+            <option>Dúvida sobre pedido</option>
+            <option>Parceria / Artista</option>
+            <option>Sugestão</option>
+            <option>Outro</option>
+          </select>
+
+          <label class="form-label" for="ct-msg">Mensagem</label>
+          <textarea class="form-input form-textarea" id="ct-msg" required placeholder="Escreva sua mensagem aqui..."></textarea>
+
+          <button type="submit" class="btn-form">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Enviar mensagem
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Info cards -->
+    <div>
+      <div class="info-card">
+        <div class="info-card-header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="info-card-title">E-mail</span>
+        </div>
+        <a href="mailto:oi@internetbabyclub.com">oi@internetbabyclub.com</a>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="info-card-title">Redes Sociais</span>
+        </div>
+        <p>Nos acompanhe no Instagram, TikTok e Twitter para ficar por dentro de tudo!</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="info-card-title">Prazo de resposta</span>
+        </div>
+        <p>Respondemos em até 2 dias úteis. 💌</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="info-card-title">Quer ser artista parceiro?</span>
+        </div>
+        <p>Selecione "Parceria / Artista" no assunto e conte sobre seu trabalho!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  initPage('contato');
+  function handleContato(e) {
+    e.preventDefault();
+    document.getElementById('form-area').innerHTML = `
+      <div class="sent-box">
+        <div style="font-size:48px;margin-bottom:16px">💌</div>
+        <h2 style="font-size:18px;font-weight:700;text-transform:uppercase;margin-bottom:8px">Mensagem enviada!</h2>
+        <p style="font-size:13px;font-weight:500;opacity:.8">Em breve entraremos em contato.</p>
+      </div>`;
+  }
+</script>
+</body>
+</html>
