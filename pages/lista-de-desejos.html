@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Desejos — Internet Baby Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<div id="drawers-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<div class="page-wrap">
+  <h1 class="page-title">Lista de Desejos</h1>
+  <p class="page-sub">Seus produtos favoritos salvos aqui.</p>
+  <div id="wishlist-page-content"></div>
+  <div class="wishlist-tip">
+    💡 <strong>Dica:</strong> Seus itens favoritos são salvos localmente no seu navegador. Crie uma conta para sincronizar entre dispositivos.
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  initPage('lista-de-desejos');
+
+  window.renderWishlistPage = function renderWishlistPage() {
+    const el = document.getElementById('wishlist-page-content');
+    if (!el) return;
+    if (wishlist.length === 0) {
+      el.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-emoji">🤍</div>
+          <h2>Nenhum favorito ainda</h2>
+          <p>Explore nossos produtos e clique no coração para salvar seus favoritos.</p>
+          <a href="./produtos.html" class="btn-checkout" style="display:inline-block;width:auto;padding:14px 32px">Ver Produtos</a>
+        </div>`;
+    } else {
+      el.innerHTML = `<div class="products-grid">${wishlist.map(p => buildProductCard(p)).join('')}</div>`;
+    }
+  }
+
+  renderWishlistPage();
+</script>
+</body>
+</html>
