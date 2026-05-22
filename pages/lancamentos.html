@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lançamentos — Internet Baby Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<div id="drawers-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<div class="page-wrap">
+  <div style="margin-bottom:32px">
+    <h1 class="page-title">Lançamentos</h1>
+    <p class="page-sub">Os drops mais recentes do Internet Baby Club.</p>
+  </div>
+
+  <!-- Hero drop banner -->
+  <div style="border:2px solid var(--fg);border-radius:24px;background:var(--ibc-purple);color:#fff;padding:48px;margin-bottom:40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;box-shadow:6px 6px 0 var(--fg)">
+    <div>
+      <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;opacity:.7;display:block;margin-bottom:12px">✦ Novo Drop</span>
+      <h2 style="font-size:clamp(24px,4vw,40px);font-weight:700;text-transform:uppercase;line-height:1;margin-bottom:12px">Coleção 2025<br>Chegou!</h2>
+      <p style="font-size:13px;font-weight:500;opacity:.8;max-width:360px;line-height:1.6">Peças exclusivas criadas por artistas independentes para a comunidade do IBC. Cada item é limitado.</p>
+    </div>
+    <div style="font-size:80px">🦋</div>
+  </div>
+
+  <div class="products-grid" id="new-grid"></div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  initPage('lancamentos');
+  const newProds = [...PRODUCTS.filter(p=>p.isNew), ...PRODUCTS.filter(p=>!p.isNew)].slice(0,12);
+  document.getElementById('new-grid').innerHTML = newProds.map(p => buildProductCard(p)).join('');
+</script>
+</body>
+</html>
