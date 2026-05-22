@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagamento — Internet Baby Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<div id="drawers-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<div class="page-wrap" id="pagamento-wrap"></div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  initPage('');
+
+  const PAY_METHODS = [
+    { id:'pix',    emoji:'📱', label:'PIX' },
+    { id:'cartao', emoji:'💳', label:'Cartão' },
+    { id:'boleto', emoji:'📄', label:'Boleto' },
+  ];
+
+  let selectedPay = 'pix';
+  let confirmed = false;
+
+  function renderPagamento() {
+    const wrap = document.getElementById('pagamento-wrap');
+
+    if (cart.length === 0 && !confirmed) {
+      wrap.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-emoji">🛍️</div>
+          <h2>Sacola vazia</h2>
+          <p>Adicione produtos antes de finalizar a compra.</p>
+          <a href="./produtos.html" class="btn-checkout" style="display:inline-block;width:auto;padding:14px 32px">Ver Produtos</a>
+        </div>`;
+      return;
+    }
+
+    if (confirmed) {
+      wrap.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-emoji">✅</div>
+          <h2>Pedido Confirmado!</h2>
+          <p>Obrigado pela compra! Você receberá um e-mail de confirmação em breve.</p>
+          <a href="../index.html" class="btn-checkout" style="display:inline-block;width:auto;padding:14px 32px">Voltar ao início</a>
+        </div>`;
+      return;
+    }
+
+    const orderItems = cart.map(i => `
+      <div class="order-item-row">
+        <div class="order-item-emoji">${i.emoji}</div>
+        <div class="order-item-info">
+          <div class="order-item-name">${i.name} × ${i.qty}</div>
+        </div>
+        <div class="order-item-price">R$ ${(i.price*i.qty).toFixed(2).replace('.',',')}</div>
+      </div>`).join('');
+
+    const payExtra = selectedPay === 'pix' ? `
+      <div class="pix-box">
+        <div style="font-size:14px;font-weight:700;text-transform:uppercase;margin-bottom:8px">Chave PIX</div>
+        <div class="pix-code">oi@internetbabyclub.com</div>
+        <div style="font-size:12px;opacity:.7">Copie a chave acima e realize o pagamento no seu banco.</div>
+      </div>` :
+      selectedPay === 'cartao' ? `
+      <div style="margin-top:16px">
+        <input class="form-input" type="text" placeholder="Número do cartão" style="margin-bottom:12px" />
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <input class="form-input" type="text" placeholder="Validade MM/AA" style="margin-bottom:0" />
+          <input class="form-input" type="text" placeholder="CVV" style="margin-bottom:0" />
+        </div>
+      </div>` :
+      `<div style="margin-top:16px;padding:16px;background:var(--muted);border-radius:var(--radius);font-size:13px;font-weight:500;opacity:.7">O boleto será enviado para seu e-mail em até 5 minutos.</div>`;
+
+    const payMethodsHtml = PAY_METHODS.map(m => `
+      <div class="pay-method${selectedPay===m.id?' selected':''}" onclick="setPay('${m.id}')">
+        <div class="pm-emoji">${m.emoji}</div>
+        <div class="pm-label">${m.label}</div>
+      </div>`).join('');
+
+    wrap.innerHTML = `
+      <h1 class="page-title" style="margin-bottom:32px">Pagamento</h1>
+      <div class="pagamento-layout">
+        <div>
+          <div class="pagamento-section">
+            <h3>Endereço de Entrega</h3>
+            <input class="form-input" type="text" placeholder="CEP" style="margin-bottom:12px" />
+            <input class="form-input" type="text" placeholder="Rua e número" style="margin-bottom:12px" />
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <input class="form-input" type="text" placeholder="Cidade" style="margin-bottom:0" />
+              <input class="form-input" type="text" placeholder="Estado" style="margin-bottom:0" />
+            </div>
+          </div>
+          <div class="pagamento-section">
+            <h3>Forma de Pagamento</h3>
+            <div class="pay-method-grid">${payMethodsHtml}</div>
+            ${payExtra}
+          </div>
+          <button class="btn-checkout" onclick="confirmOrder()">Confirmar Pedido</button>
+        </div>
+        <div>
+          <div class="sacola-summary">
+            <h3>Resumo do Pedido</h3>
+            ${orderItems}
+            <div style="margin-top:16px;padding-top:12px;border-top:2px solid var(--fg)">
+              <div class="summary-row"><span>Subtotal</span><span>R$ ${cartTotal().toFixed(2).replace('.',',')}</span></div>
+              <div class="summary-row"><span>Frete</span><span>Grátis</span></div>
+              <div class="summary-total"><span>Total</span><span>R$ ${cartTotal().toFixed(2).replace('.',',')}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function setPay(id) {
+    selectedPay = id;
+    renderPagamento();
+  }
+
+  function confirmOrder() {
+    cart = [];
+    saveCart();
+    updateCartBadge();
+    confirmed = true;
+    renderPagamento();
+  }
+
+  renderPagamento();
+</script>
+</body>
+</html>
