@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internet Baby Club — Início</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+<body>
+
+<div id="drawers-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<!-- ═══ HERO ══════════════════════════════════════════════ -->
+<section class="hero-section" aria-label="Banner principal">
+  <div class="hero-inner max-w">
+    <div class="hero-left" id="hero-left">
+      <span class="hero-tag">✦ Fan Merchandise</span>
+      <h1 class="hero-h1">Bem-vindos ao<br>Internet Baby Club</h1>
+      <p class="hero-sub">Um espaçinho feito de fãs para fãs, porque ninguém entende um fã melhor do que outro fã.</p>
+      <div class="hero-btns">
+        <a href="./pages/produtos.html" class="btn-hero-main">
+          Entrar no Clube
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="./pages/sobre.html" class="btn-hero-sec">Sobre a loja</a>
+      </div>
+    </div>
+    <div class="hero-right" id="hero-right">
+      <div class="hero-right-content">
+        <span class="hero-emoji">🦋</span>
+        <p class="hero-collection-label" id="hero-label">Coleção 2025</p>
+        <a href="./pages/lancamentos.html" class="hero-cta-btn" id="hero-cta">
+          Ver lançamentos
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CATEGORIES ════════════════════════════════════════ -->
+<section style="padding:16px 32px 32px">
+  <div class="max-w">
+    <h2 class="section-title" style="margin-bottom:24px">Categorias</h2>
+    <div class="cat-scroll-wrap">
+      <button class="scroll-btn left" onclick="scrollCats(-1)">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="cat-scroll" id="cat-scroll"></div>
+      <button class="scroll-btn right" onclick="scrollCats(1)">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURED PRODUCTS ═════════════════════════════════ -->
+<section style="padding:16px 32px 32px">
+  <div class="max-w">
+    <div class="section-header">
+      <h2 class="section-title">Destaques</h2>
+      <a href="./pages/produtos.html" class="see-all">
+        Ver todos
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="products-grid" id="featured-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ NEW DROPS ═════════════════════════════════════════ -->
+<section style="padding:16px 32px 32px">
+  <div class="max-w">
+    <div class="section-header">
+      <h2 class="section-title">Novidades do Clube</h2>
+      <a href="./pages/lancamentos.html" class="see-all">
+        Ver tudo
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="products-grid" id="newdrops-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ ARTISTS ═══════════════════════════════════════════ -->
+<section style="padding:16px 32px 32px">
+  <div class="max-w">
+    <div class="section-header">
+      <h2 class="section-title">Artistas em Destaque</h2>
+      <a href="./pages/artistas.html" class="see-all">
+        Ver todos
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="artists-grid" id="artists-home-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT STRIP ════════════════════════════════════════ -->
+<section style="padding:16px 32px 32px">
+  <div class="max-w">
+    <div class="about-strip">
+      <div>
+        <h2>Feito de fãs<br>para fãs</h2>
+        <p>Cada produto é criado com carinho especialmente para quem ama música e cultura pop. Nossa missão é transformar esse amor em algo que você possa guardar e usar.</p>
+      </div>
+      <a href="./pages/sobre.html" class="btn-about">
+        Conheça a loja
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ NEWSLETTER ═════════════════════════════════════════ -->
+<section style="padding:16px 32px 32px">
+  <div class="max-w">
+    <div class="newsletter-box">
+      <div class="nl-emoji">💌</div>
+      <h2>Entre para o clube</h2>
+      <p>Cadastre seu e-mail e ganhe 10% off no primeiro pedido. Fique por dentro dos lançamentos e drops exclusivos!</p>
+      <div id="nl-form-wrap">
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input class="nl-input" type="email" placeholder="seuemail@exemplo.com" required />
+          <button type="submit" class="btn-nl">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Entrar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script src="./assets/js/main.js"></script>
+<script>
+  initPage('home');
+
+  /* Hero hover */
+  const heroRight = document.getElementById('hero-right');
+  const heroLeft  = document.getElementById('hero-left');
+  heroRight.addEventListener('mouseenter', () => {
+    heroRight.classList.add('hovered');
+    heroLeft.style.flex = '0 0 0%'; heroLeft.style.opacity = '0';
+    heroLeft.style.minWidth = '0'; heroLeft.style.padding = '0';
+    heroRight.style.flex = '1 1 100%';
+    document.getElementById('hero-label').textContent = 'Explore a coleção';
+  });
+  heroRight.addEventListener('mouseleave', () => {
+    heroRight.classList.remove('hovered');
+    heroLeft.style.flex = '1 1 50%'; heroLeft.style.opacity = '1';
+    heroLeft.style.minWidth = ''; heroLeft.style.padding = '';
+    heroRight.style.flex = '1 1 50%';
+    document.getElementById('hero-label').textContent = 'Coleção 2025';
+  });
+
+  /* Categories */
+  function scrollCats(dir) { document.getElementById('cat-scroll').scrollBy({ left: dir * 200, behavior: 'smooth' }); }
+  document.getElementById('cat-scroll').innerHTML = CATEGORIES.map(c =>
+    `<a class="cat-item" href="./pages/produtos.html?cat=${c.id}">
+      <span class="cat-emoji">${c.emoji}</span>
+      <span class="cat-name">${c.name}</span>
+    </a>`
+  ).join('');
+
+  /* Featured */
+  document.getElementById('featured-grid').innerHTML = PRODUCTS.slice(0,6).map(p => buildProductCard(p)).join('');
+
+  /* New Drops */
+  document.getElementById('newdrops-grid').innerHTML = PRODUCTS.filter(p=>p.isNew).slice(0,3).map(p => buildProductCard(p,true)).join('');
+
+  /* Artists */
+  document.getElementById('artists-home-grid').innerHTML = ARTISTS.slice(0,3).map(a =>
+    `<div class="artist-card" onclick="location.href='./pages/artistas.html?artist=${a.id}'">
+      <div class="artist-avatar" style="background:${COLOR_MAP[a.color]||'var(--ibc-cream)'}">${a.emoji}</div>
+      <div>
+        <div class="artist-tag">${a.tag}</div>
+        <div class="artist-name">${a.name}</div>
+        <div class="artist-desc">${a.desc}</div>
+      </div>
+    </div>`
+  ).join('');
+</script>
+</body>
+</html>
